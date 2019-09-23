@@ -1,0 +1,54 @@
+ getWorkers(value: string) {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      if (value && value.trim().length > 0) {
+        this.loading = true;
+        console.log('Calling API with:', value);
+        this.workerApiService.getWorkers(value).subscribe(data => {
+          this.workersList = [];
+          data.hits.forEach(worker => {
+            this.workersList.push({
+              name: worker._source.FullNm,
+              imgUrl: 'https://photos.intel.com/images/' + worker._id + '.jpg',
+              id: worker._id
+            });
+          });
+          this.filteredWorkers = observableOf(this.workersList);
+          this.loading = false;
+        });
+      } else {
+        this.filteredWorkers = observableOf([]);
+      }
+    }, 500);
+  }
+
+  selectedUser(ctrlValue: string, isOwner: boolean) {
+    const exists = this.collabList.find(worker => {
+      return worker.name === ctrlValue;
+    });
+    if (!exists) {
+      const workerObj = this.workersList.find(worker => {
+        return worker.name === ctrlValue;
+      });
+      workerObj.isOwner = isOwner;
+      this.ownerReadOnly = isOwner;
+      this.collabList.push(workerObj);
+    } else if (isOwner) {
+      exists.isOwner = isOwner;
+      this.ownerReadOnly = true;
+    }
+    this.collaboratorsControl.setValue('');
+  }
+
+  removeCollaborator(workerId: string) {
+    this.collabList = this.collabList.filter(worker => {
+      return worker.id !== workerId;
+    });
+  }
+
+  clearOwner(ctrlValue: string) {
+    const id = this.collabList.find(worker => worker.name === ctrlValue).id;
+    this.removeCollaborator(id);
+    this.ownerReadOnly = false;
+    this.ownerControl.setValue('');
+  }

@@ -1,0 +1,26 @@
+<section>
+  <div class="container add-poc">
+    <div class="row">
+      <div class="col">
+        <h1 style="margin: 20px" class="title">FuSa Design Tools</h1>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+<div class="row">
+  <div class="col-md-7">
+    <app-design-tools-list
+      (toolWasSelected)="selectedTool=$event"
+    ></app-design-tools-list>
+  </div>
+  <div class="col-md-5">
+    <app-design-tools-version
+      *ngIf="selectedTool; else infoText"
+      [designTool]="selectedTool"
+    ></app-design-tools-version>
+    <ng-template #infoText>
+      <p style="margin-top:200px;">Click a tool design category</p>
+    </ng-template>
+  </div>
+</div>
+  </div>
+</section>

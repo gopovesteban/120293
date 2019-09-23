@@ -1,0 +1,21 @@
+// MLAF imports *Start*
+$intel-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+$icon-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+@import 'node_modules/it-mlaf-sass-bs4/it-mlaf';
+// MLAF imports *End*
+
+footer {
+    display: flex;
+    height: 35px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    border-top: 1px solid $light-gray;
+    background-color: $lighter-gray;
+    font-size: 0.8em;
+    color: $dark-blue;
+    div {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}

@@ -1,0 +1,19 @@
+<a   style="cursor:pointer;color: black;" class="list-group-item-text" (click)="onSelected()">
+
+  <div class="col-md-2" style="background-color:white;float: left; margin:2px 2px 2px 2px;border: 1px white solid rgb(213, 220, 226); min-height: 190px">
+    <div style="height: 75px;">
+      <h3 title="click to see historic evidence" class="list-group-item-heading" style="text-align: center;margin-top:5px;margin-bottom:3px">{{ softwareTile.name }}</h3>
+    </div>
+    <div>
+    <img *ngIf="softwareTile.compliancy == 'COMPLIANT'" src="assets/images/compliant.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+    <img *ngIf="softwareTile.compliancy == 'NON COMPLIANT'" src="assets/images/nonCompliant.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+    <img *ngIf="softwareTile.compliancy == 'IN PROCESS'" src="assets/images/process.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+    <img *ngIf="softwareTile.compliancy == 'BACKLOG'" src="assets/images/backlog.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+    <img *ngIf="softwareTile.compliancy == 'NOT REQUIRED'" src="assets/images/notRequired.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+    </div>
+    <h6 class="list-group-item-heading" style="text-align: center; margin-top:5px;">{{ softwareTile.compliancy }} </h6>
+    <h6 title="current version" class="list-group-item-heading" style="text-align: center;">{{ softwareTile.currentVersion }}</h6>
+  </div>
+</a>
+
+

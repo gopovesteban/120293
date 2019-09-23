@@ -1,0 +1,45 @@
+getData() {
+    const self = this;
+    this._assetService.getProjects().subscribe(
+        result => {
+        result.forEach(item => {
+            self.projectsList.push(item);
+        });
+        self.dataSource = new MatTableDataSource(self.projectsList);
+        console.log('Items: ', self.projectsList);
+        },
+        error => this.errorMessage = <any>error
+    );
+}
+
+submitPoC() {
+    this.poc = {
+      name: this.appNameControl.value,
+      owner: this.ownerControl.value,
+      collaborators: this.collabList,
+      status: Status.PENDING,
+      pathway: this.pathwayControl.value.name,
+      description: this.descriptionControl.value,
+      presentationDate: this.dateControl.value,
+      createdAt: new Date()
+    };
+    this._assetService.createProject(this.poc).subscribe(
+      result => {
+        console.log(result);
+        this.step++;
+        this.onStepChange();
+        this.projectsList.push(this.poc);
+        this.dataSource = new MatTableDataSource(this.projectsList);
+        this.openSnackBar('Your PoC has been created ! We will contact you soon.');
+        this.collabList = [];
+        this.pocFormGroup.reset();
+      },
+      error => {
+        this.errorMessage = error;
+        this.step = 0;
+        this.openSnackBar('Sorry there was an internal problem, please try again.');
+        this.collabList = [];
+        this.pocFormGroup.reset();
+      }
+    );
+}

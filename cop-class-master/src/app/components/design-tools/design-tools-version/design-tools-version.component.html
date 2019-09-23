@@ -1,0 +1,43 @@
+<div class="row">
+  <mat-form-field class="form-group">
+    <input matInput type="text"  placeholder="Search Tools by name"
+           style="width: 300px" [(ngModel)]="searchTerm"/>
+  </mat-form-field>
+  <br>
+  <div class="col-xs-12" style="border: 1px solid rgb(213, 220, 226);margin-top: 25px;background-color: white"
+       *ngFor="let tool of designTool.tools | designFilter:searchTerm">
+    <h4 style="display: block;margin-left: auto; margin-right: auto;">{{ tool.name }}</h4>
+    <div class="col-xs-12" style="border: 1px solid rgb(213, 220, 226);"
+         *ngFor="let version of tool.versions">
+      <div class="col-xs-12">
+      <h5>version: {{ version.name }}</h5>
+      </div>
+      <div>
+      <a href="{{ version.resultsLink}}" style="float: right; margin-left: 30px;">Results link</a>
+      <div style="float: left">
+        <h5 style="">ISO26262 Qualification</h5>
+        <img *ngIf="version.isoQual == 'COMPLIANT'" src="assets/images/compliant.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.isoQual == 'NON COMPLIANT'" src="assets/images/nonCompliant.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.isoQual == 'IN PROCESS'" src="assets/images/process.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.isoQual == 'BACKLOG'" src="assets/images/backlog.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.isoQual == 'NOT REQUIRED'" src="assets/images/notRequired.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <p class="list-group-item-heading" style="text-align: center; margin-top:5px;">{{ version.isoQual }} </p>
+      </div>
+      <div style="float: left;margin-left: 40px;">
+        <h5 style="">IEC Qualification</h5>
+        <img *ngIf="version.iecQual == 'COMPLIANT'" src="assets/images/compliant.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.iecQual == 'NON COMPLIANT'" src="assets/images/nonCompliant.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.iecQual == 'IN PROCESS'" src="assets/images/process.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.iecQual == 'BACKLOG'" src="assets/images/backlog.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <img *ngIf="version.iecQual == 'NOT REQUIRED'" src="assets/images/notRequired.jpg" style=" display: block;margin-left: auto; margin-right: auto; margin-bottom: 5px; max-width: 25px; max-height: 25px;margin-top:5px;">
+        <p class="list-group-item-heading" style="text-align: center; margin-top:5px;">{{ version.iecQual }} </p>
+      </div>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+</div>

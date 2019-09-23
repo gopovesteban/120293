@@ -1,0 +1,102 @@
+stages:
+  - build
+  - review
+  - deploy  
+  
+variables:
+  app_name: copcr-ui-material
+  app_component: ui
+  CF_API_ENDPOINT: https://api.apps1-fm-int.icloud.intel.com
+  
+  
+
+## required for GitLab Runner container
+before_script:
+- export http_proxy=http://proxy-chain.intel.com:911
+- export https_proxy=http://proxy-chain.intel.com:912
+
+## cache the node_modules for this branch
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+## build stage
+build_ui:
+  image: node:8
+  stage: build
+  artifacts:
+    paths:
+      - dist
+      - manifest.yml
+  script:
+    - npm install --save it-mlaf-sass-bs4 --registry https://pixi.intel.com/
+    - npm install --unsafe-perm=true --allow-root
+    - npm install -g @angular/cli --unsafe-perm=true --allow-root
+    - npm run build
+
+## test
+#test:  
+#  image: teracy/angular-cli:latest
+#  stage: review
+#  script:
+#    - npm install
+#    - npm run test
+
+    
+deploy_review:
+  dependencies:
+    - build_ui
+  image: nulldriver/cf-cli-resource:latest
+  stage: review
+  script:
+    - echo "app name - ${app_name}"
+    - echo "CF_USERNAME - ${CF_USERNAME}"
+    - echo "CF_PASSWORD - ${CF_PASSWORD}"
+    - echo "CF_ORG - ${CF_ORG}"
+    - echo "component name - ${app_component}"
+    - echo "commit - ${CI_COMMIT_REF_NAME}"
+    - cf login -u ${CF_USERNAME} -p ${CF_PASSWORD} -a ${CF_API_ENDPOINT} -o ${CF_ORG} -s development --skip-ssl-validation
+    - sed -i "" "s/pbe/${CI_COMMIT_REF_NAME}/g" manifest.yml # for macOS
+    - cf push ${app_name}-${app_component}-${CI_COMMIT_REF_NAME}
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}
+    on_stop: stop_review
+    url: https://${app_name}-${app_component}-${CI_COMMIT_REF_NAME}.apps1-fm-int.icloud.intel.com
+  only:
+    - branches
+  except:
+    - master
+
+stop_review:
+  stage: review
+  image: nulldriver/cf-cli-resource:latest
+  variables:
+    GIT_STRATEGY: none # Dont bother checking out code
+  script:
+    - cf login -u ${CF_USERNAME} -p ${CF_PASSWORD} -a ${CF_API_ENDPOINT} -o ${CF_ORG} -s development --skip-ssl-validation
+    - cf delete -f -r ${app_name}-${app_component}-${CI_COMMIT_REF_NAME}
+  when: manual
+  except:
+    - master
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}
+    action: stop
+
+development:
+  dependencies:
+    - build_ui
+  stage: deploy
+  image: nulldriver/cf-cli-resource:latest
+  script:
+    - cf login -u ${CF_USERNAME} -p ${CF_PASSWORD} -a ${CF_API_ENDPOINT} -o ${CF_ORG} -s development --skip-ssl-validation
+    - cf push ${app_name}-${app_component}-dev
+
+  only:
+    - master
+  environment:
+    name: development
+    url: https://copcr-uimt.apps1-fm-int.icloud.intel.com
+    
+
+

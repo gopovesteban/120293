@@ -1,0 +1,48 @@
+<header>
+
+  <!-- <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand">
+      <img class="navbar-logo" alt="Intel Logo">
+      <span><a [routerLink]="['/']" class="navbar-brand">App Refactoring</a></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"[routerLink]="['/']">Grettings{{ greetings }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['./add-poc']">Add PoC</a>
+        </li>
+      </ul>
+    </div>
+  </nav> -->
+
+  <nav class="navbar navbar-expand-sm ">
+    <a class="navbar-brand">
+      <img class="navbar-logo" alt="Intel Logo">
+      <span><a [routerLink]="['/']" class="navbar-brand">FuSa Dashboard</a></span>
+    </a>
+    <button (click)="toggleCollapse()" class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse align-right" id="navbarNavDropdown" [class.show]="show">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="software-tools">Software Tools</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="design-tools">Design Tools</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink=""><span class="icon intelicon-home-solid"></span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</header>

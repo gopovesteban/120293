@@ -1,0 +1,77 @@
+onStepChange(): void {
+    this.value = 0;
+
+    if (this.appNameControl.valid) {
+      this.value += 20;
+    }
+
+    if (this.ownerControl.valid) {
+      this.value += 20;
+    }
+
+    if (this.pathwayControl.valid) {
+      this.value += 20;
+    }
+
+    if (this.descriptionControl.valid) {
+      this.value += 20;
+    }
+
+    if (this.dateControl.valid) {
+      this.value += 20;
+    }
+
+  }
+
+  setStep(index: number) {
+    this.step = index;
+    this.onStepChange();
+  }
+
+  nextStep() {
+    this.step++;
+    this.onStepChange();
+  }
+
+  prevStep() {
+    this.step--;
+    this.onStepChange();
+  }
+
+  getPathwayErrorMessage() {
+    return this.pathwayControl.hasError('required') ? 'You must enter a value' :
+      '';
+  }
+
+  getRequiredErrorMessage() {
+    return this.appNameControl.hasError('required') ? 'You must enter a value' :
+      '';
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Ok', {
+      duration: 4000,
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  openItemCardDialog(item: PoC) {
+    this.itemCardModalService.openModal({
+      _id: item._id,
+      owner: item.owner,
+      collaborators: item.collaborators,
+      pathway: item.pathway,
+      presentationDate: item.presentationDate,
+      name: item.name,
+      status: item.status,
+      description: item.description,
+      createdAt: new Date()
+    }).afterClosed()
+      .subscribe(result => {
+        console.log('Project card dialog closed.', result);
+        item.status = result.newStatus;
+      });
+  }

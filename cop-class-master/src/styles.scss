@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f9f9f9 !important}
+
+$intel-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+$icon-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+
+.highlight{ background-color: green }
+
+@import "node_modules/it-mlaf-sass-bs4/it-mlaf";

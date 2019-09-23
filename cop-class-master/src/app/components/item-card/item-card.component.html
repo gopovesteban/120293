@@ -1,0 +1,169 @@
+<div class="container item-card">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="title"> {{ name }} </h1>
+      <mat-divider></mat-divider>
+      <small>Project details & information</small>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row" *ngIf="!loading">
+      <div class="col-5">
+        <!-- Owner info line -->
+        <div class="info-line">
+
+          <div class="icon">
+            <mat-icon>person_pin</mat-icon>
+          </div>
+
+          <div class="label-info">
+            <div class="text">
+              <span class="bold">Owner: </span>
+            </div>
+            <div class="info-text">
+              <p> {{ owner }} </p>
+              <!-- <small> {{ ownerId }} </small> -->
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- Collaborators info line -->
+        <div class="info-line">
+
+          <div class="icon">
+            <mat-icon>group</mat-icon>
+          </div>
+
+          <div class="label-info">
+            <div class="text">
+              <p class="bold collab">Collaborators:</p>
+            </div>
+            <div class="collab-bucket" *ngIf="collaborators.length > 0">
+              <ng-container *ngFor="let worker of collaborators">
+                <mat-card class="example-card" matTooltip="{{ worker.name }}">
+                  <img class="worker-img" [src]="worker.imgUrl">
+                </mat-card>
+              </ng-container>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pathway info line -->
+        <div class="info-line">
+
+          <div class="icon">
+            <mat-icon>call_split</mat-icon>
+          </div>
+
+          <div class="label-info">
+            <div class="text">
+              <span class="bold">Pathway: </span>
+            </div>
+            <div class="info-text">
+              <p> {{ pathway }} </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Presentation date info line -->
+        <div class="info-line">
+
+          <div class="icon">
+            <mat-icon>date_range</mat-icon>
+          </div>
+
+          <div class="label-info">
+            <div class="text">
+              <span class="bold">Presentation date: </span>
+            </div>
+            <div class="info-text">
+              <p> {{ presentationDate | date }} </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Status info line -->
+        <div class="info-line">
+
+          <div class="icon">
+            <mat-icon>assignment</mat-icon>
+          </div>
+          <div class="label-info">
+            <div class="text">
+              <div class="status-line">
+                <span class="bold">Status: </span>
+              </div>
+            </div>
+            <div class="info-text icons" *ngIf="!updateLoading">
+              <p> {{ status | titlecase }} </p>
+              <mat-icon class="approved" *ngIf="status == 'approved'">check</mat-icon>
+              <mat-icon class="pending" *ngIf="status == 'pending'">error_outline</mat-icon>
+              <mat-icon class="rejected" *ngIf="status == 'rejected'">clear</mat-icon>
+            </div>
+            <div class="info-text " *ngIf="updateLoading">
+              <mat-spinner [diameter]="24"></mat-spinner>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+      <div class="col-7">
+
+        <!-- Description info line -->
+        <div class="description-line">
+          <div class="info-line description">
+            <div class="icon">
+              <mat-icon>assignment</mat-icon>
+            </div>
+            <div class="text">
+              <p><span class="bold">Project description: </span></p>
+            </div>
+          </div>
+
+          <div class="description-text">
+            <!-- <p (click)="expandText()" matTooltip=" {{ expandTooltip }} " [matTooltipPosition]="'before'">
+              {{ description | truncate : charLimit : true }}</p> -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!loading">
+      <div class="col text-center">
+        <mat-divider class="separation-bottom"></mat-divider>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isAdmin && !loading">
+
+      <div class="col-12 separation-bottom">
+        <small>You can review and update this project's status:</small>
+      </div>
+      <div class="col-12 options">
+        <button mat-raised-button class="approve-button" (click)="updateStatus('approved')"
+          [disabled]="updateLoading">Approve</button>
+        <button mat-raised-button class="reject-button" (click)="updateStatus('rejected')"
+          [disabled]="updateLoading">Reject</button>
+      </div>
+    </div>
+
+
+    <div class="row" *ngIf="loading">
+      <div class="col spinner-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

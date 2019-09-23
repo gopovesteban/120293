@@ -1,0 +1,27 @@
+// MLAF imports *Start*
+$intel-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+$icon-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+$intel-images-path: "node_modules/it-mlaf-sass-bs4/images/" !default;
+@import 'node_modules/it-mlaf-sass-bs4/it-mlaf';
+// MLAF imports *End*
+
+.navbar {
+    background-color: $blue;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+}
+
+img.navbar-logo {
+    content: url(#{$intel-images-path}/intel-logo-white-100.png);
+    float: left;
+    height: 50px;
+    padding: 10px 15px;
+}
+
+nav {
+    max-height: 50px;
+}
+
+div.collapse.align-right {
+    justify-content: flex-end;
+}

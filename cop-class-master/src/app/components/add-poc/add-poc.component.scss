@@ -1,0 +1,207 @@
+// MLAF imports *Start*
+    $intel-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+    $icon-font-path: "node_modules/it-mlaf-sass-bs4/fonts/" !default;
+    @import 'node_modules/it-mlaf-sass-bs4/it-mlaf';
+// MLAF imports *End*
+
+.container.add-poc {
+    margin-top: 1em;
+}
+
+.mat-form-field {
+    padding-right: 1em;
+}
+
+.example-headers-align .mat-expansion-panel-header-title, 
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.full-width {
+    width: 80%;
+}
+
+h1.title {
+   color: #53565a;
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #53565a;
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+}
+  
+td, th {
+    width: 25%;
+}
+
+.margin-top {
+    margin-top: 4em;
+}
+
+.title {
+    color: #292a2f;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5em;
+    font-weight: 100;
+}
+
+p {
+    color: #292a2f;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    font-weight: 100;
+}
+
+.center-stuff {
+    display: flex;
+    justify-content: center;
+}
+
+mat-divider {
+    margin-bottom: 1em;
+}
+
+.pro-msg {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.table-cont {
+    margin-bottom: 2em;
+}
+
+.input-spinner ::ng-deep .mat-button-focus-overlay {
+    background-color: white;
+}
+
+.worker-picker {
+    width: 240px;
+}
+
+img.worker-img {
+    height: 30px;
+    border-radius: 50%;
+    padding-right: 10px;
+}
+
+mat-row {
+    cursor: pointer;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+mat-row:hover {
+    background-color: #edeff0;
+}
+
+mat-cell mat-icon.approved {
+    color: green;
+    padding-left: 5px;
+}
+  
+mat-cell mat-icon.rejected {
+    color: red;
+    padding-left: 5px;
+}
+
+mat-cell mat-icon.pending {
+    color: #f7c15c;
+    padding-left: 5px;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: $light-blue;
+}
+
+::ng-deep .mat-progress-spinner circle {
+    stroke  : $blue;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: $light-gray;
+}
+
+::ng-deep .mat-progress-bar {
+    border-radius: 2px;
+}
+
+::ng-deep .mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {
+    color: $blue;
+}
+
+::ng-deep .mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+    color: $gray;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: $blue !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-ripple {
+    background-color: $blue !important;
+} 
+
+.example-card {
+    max-width: 400px;
+}
+
+.collab-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.collab-split {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    mat-icon {
+        color:$blue;
+    }
+}
+
+.collab-bucket {
+    display: flex;
+    flex-direction: row;
+
+    img.worker-img {
+        height: 40px;
+    }
+
+    mat-card {
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+
+        button {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+
+            mat-icon {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .collab-info {
+        display: flex;
+        flex-direction: column;
+    }
+}

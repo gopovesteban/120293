@@ -1,0 +1,62 @@
+/*-- Object mat-table uses to get values for rows --*/
+  dataSource: MatTableDataSource<PoC>;
+
+  /*-- Column names to be used in table --*/
+  displayedColumns: string[] = ['name', 'owner', 'pathway', 'status', 'date'];
+
+  /*-- String to send in error actions --*/
+  errorMessage: string;
+
+  /*-- Using this form group to reset controls after submit --*/
+  pocFormGroup: FormGroup;
+
+  /*-- PoC object to be sent to API --*/
+  poc: PoC;
+
+  /*-- Min and Max dates for date picker validations --*/
+  minDate = new Date();
+  maxDate = new Date(2020, 0, 1);
+
+  /*-- Step for expansion panel. Start at -1 so all are closed. --*/
+  step = -1;
+
+  /*-- All controls used in form --*/
+  appNameControl = new FormControl('', Validators.required);
+  ownerControl = new FormControl('', Validators.required);
+  collaboratorsControl = new FormControl('');
+  pathwayControl = new FormControl('', Validators.required);
+  descriptionControl = new FormControl('', Validators.required);
+  dateControl = new FormControl('', Validators.required);
+
+  /*-- Array with values for pathway dropdown in form --*/
+  pathways: Pathway[] = [
+    { name: 'Application', owner: 'Sylvia Ujueta' },
+    { name: 'Cloud', owner: 'Jeffrey Mulgrave' },
+    { name: 'Data', owner: 'Jose Cambronero' }
+  ];
+
+  /*-- This is the observable which we update the values for autocomplete on worker picker --*/
+  filteredWorkers: Observable<any[]>;
+
+  /*-- Timer object to only call worker service after user stops typing (500ms) --*/
+  timer;
+
+  /*-- Show/hide spinner on worker picker input --*/
+  loading = false;
+
+  /*-- WorkersList is list we show in autocomplete options --*/
+  workersList: Worker[] = [];
+
+  /*-- CollabList saves all collaborators added in form --*/
+  collabList: Worker[] = [];
+
+  /*-- Set readOnly property for owner input if option has been selected, on clear set to false --*/
+  ownerReadOnly = false;
+
+  /*-- ProjectList is used as a temp when getting/creating projects before updating table datasource --*/
+  projectsList: PoC[] = [];
+
+  /*-- Values for progress bar --*/
+  color = 'primary';
+  mode = 'determinate';
+  value = 0;

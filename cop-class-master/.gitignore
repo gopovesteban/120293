@@ -1,0 +1,53 @@
+# Node
+node_modules/*
+lib/node_modules/*
+npm-debug.log
+package-lock.json
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# JetBrains
+.idea
+.project
+.settings
+.idea/*
+*.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Ngc generated files
+**/*.ngfactory.ts
+
+# Build files
+dist
+dist/*
+!dist/.git
+/docs
+/coverage
+/.tmp
+build/*
+
+# Yarn
+yarn.lock
+yarn-error.log
+/build
+/dist
+/.vscode
+/package-lock.json
+/package-lock.json

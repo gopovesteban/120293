@@ -1,0 +1,184 @@
+<mat-accordion class="example-headers-align">
+
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        General info
+        </mat-panel-title>
+        <mat-panel-description>
+        PoC's details
+        <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field hintLabel="Eg. My cool App">
+        <input matInput placeholder="Project Title" [formControl]="appNameControl">
+        <mat-error *ngIf="appNameControl.invalid">{{getRequiredErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="worker-picker" hintLabel="Search & select users by idsid, wwid or name">
+        <input matInput #input placeholder="Project Owner" [formControl]="ownerControl" [matAutocomplete]="auto" [readOnly]="ownerReadOnly">
+        <button mat-button matSuffix mat-icon-button class="input-spinner">
+        <mat-spinner *ngIf="loading" [diameter]="16"></mat-spinner>
+        </button>
+        <button *ngIf="!loading && ownerControl.value" mat-button matSuffix mat-icon-button aria-label="Clear"
+        (click)="clearOwner(ownerControl.value)">
+        <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="ownerControl.invalid">You need to select an owner</mat-error>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+        (optionSelected)="selectedUser($event.option.value, true)">
+        <mat-option *ngFor="let worker of filteredWorkers | async" [value]="worker.name">
+            <img class="worker-img" [src]="worker.imgUrl">
+            <small>{{ worker.name }}</small>
+        </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        Collaborators
+        </mat-panel-title>
+        <mat-panel-description>
+        People working on project
+        <mat-icon>category</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+
+    <div class="collab-row">
+        <mat-form-field class="worker-picker" hintLabel="Search & select users by idsid, wwid or name">
+        <input matInput #input placeholder="Add collaborators" [formControl]="collaboratorsControl"
+            [matAutocomplete]="autoCollab">
+        <button mat-button matSuffix mat-icon-button class="input-spinner">
+            <mat-spinner *ngIf="loading" [diameter]="16"></mat-spinner>
+        </button>
+        <button *ngIf="!loading && collaboratorsControl.value" mat-button matSuffix mat-icon-button
+            aria-label="Clear" (click)="collaboratorsControl.setValue('')">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #autoCollab="matAutocomplete"
+            (optionSelected)="selectedUser($event.option.value, false)">
+            <mat-option *ngFor="let worker of filteredWorkers | async" [value]="worker.name">
+            <img class="worker-img" [src]="worker.imgUrl">
+            <small>{{ worker.name }}</small>
+            </mat-option>
+        </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="collab-split">
+        <mat-icon>supervised_user_circle</mat-icon>
+        <mat-icon>chevron_right</mat-icon>
+        </div>
+
+        <div class="collab-bucket" *ngIf="collabList.length > 0">
+        <ng-container *ngFor="let worker of collabList">
+            <mat-card class="example-card">
+            <img class="worker-img" [src]="worker.imgUrl">
+            <div class="collab-info">
+                <small>{{ worker.name }}</small>
+                <small>{{ worker.id }}</small>
+            </div>
+            <button *ngIf="!worker.isOwner" mat-button matSuffix mat-icon-button aria-label="Clear"
+                (click)="removeCollaborator(worker.id)">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button *ngIf="worker.isOwner" matTooltip="Cannot remove project owner" mat-button matSuffix mat-icon-button aria-label="Clear">
+                <mat-icon>how_to_reg</mat-icon>
+            </button>
+            </mat-card>
+        </ng-container>
+        </div>
+
+    </div>
+
+    <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        Project Pathway
+        </mat-panel-title>
+        <mat-panel-description>
+        Your project's pathway
+        <mat-icon>call_split</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+        <mat-select placeholder="Select a pathway" [formControl]="pathwayControl">
+        <mat-option *ngFor="let option of pathways" [value]="option">
+            {{option.name}}
+        </mat-option>
+        </mat-select>
+        <mat-hint align="start">Application, Data or Cloud</mat-hint>
+        <mat-error *ngIf="pathwayControl.hasError('required')">Please choose an option</mat-error>
+    </mat-form-field>
+
+    <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        Description
+        </mat-panel-title>
+        <mat-panel-description>
+        Description of your project
+        <mat-icon>message</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="full-width">
+        <textarea matInput placeholder="Describe your project. If you have an IAP include it."
+        [formControl]="descriptionControl"></textarea>
+        <mat-error *ngIf="descriptionControl.invalid">{{getRequiredErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+        Presentation date
+        </mat-panel-title>
+        <mat-panel-description>
+        Presentation date
+        <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Select a date"
+        readonly [formControl]="dateControl">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="submitPoC()" matTooltip="Click to submit PoC."
+        [disabled]="(appNameControl.invalid || ownerControl.invalid || pathwayControl.invalid || descriptionControl.invalid || dateControl.invalid)">
+        Submit
+        </button>
+    </mat-action-row>
+    </mat-expansion-panel>
+
+</mat-accordion>

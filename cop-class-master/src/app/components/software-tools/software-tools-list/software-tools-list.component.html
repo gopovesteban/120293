@@ -1,0 +1,10 @@
+
+<div clas="row">
+  <div class="col-xs-12">
+    <app-software-tools-item *ngFor="let softwareTool of softwareTools; let i = index;"
+                             (click)="setRow(i)" [ngClass]="{'highlight': selectedIndex === i}"
+                             [softwareTile]="softwareTool"
+                             (softwareToolSelected)="onToolSelected(softwareTool)"
+    ></app-software-tools-item>
+  </div>
+</div>

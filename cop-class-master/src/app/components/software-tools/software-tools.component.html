@@ -1,0 +1,29 @@
+<section>
+  <div class="container add-poc">
+    <div class="row">
+      <div class="col">
+        <h1 style="margin: 20px" class="title">FuSa Software Tools</h1>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+<div class="row">
+  <div class="col-7">
+    <app-software-tools-list
+      (toolWasSelected)="selectedTool=$event"
+    ></app-software-tools-list>
+  </div>
+  <div class="col-5">
+    <div style="background-color:white;border: white">
+      <canvas id="pieChart"></canvas>
+    </div>
+    <app-software-tools-version
+      *ngIf="selectedTool; else infoText"
+      [softwareTool]="selectedTool"
+    ></app-software-tools-version>
+    <ng-template #infoText>
+      <p style="margin-top:200px;">Click a tool to drill in into historic evidence</p>
+    </ng-template>
+  </div>
+</div>
+  </div>
+</section>

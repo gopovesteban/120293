@@ -1,0 +1,4 @@
+constructor(public snackBar: MatSnackBar, private itemCardModalService: ItemCardModalService,
+    private _assetService: AssetService, private workerApiService: WorkerApiService, private _formBuilder: FormBuilder) {
+    this.getData();
+}

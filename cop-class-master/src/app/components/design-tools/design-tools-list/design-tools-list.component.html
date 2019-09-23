@@ -1,0 +1,8 @@
+<div clas="row">
+  <div class="col-sm-12" style="margin-top: 50px">
+    <app-design-tools-item *ngFor="let designTool of designTools"
+                           [designTile]="designTool"
+                           (designToolSelected)="onToolSelected(designTool)"
+    ></app-design-tools-item>
+  </div>
+</div>

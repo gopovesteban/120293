@@ -1,0 +1,16 @@
+defaults: &defaults
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+  memory: 64M
+  disk_quota: 1024M
+  instances: 1
+  path: dist
+  env:
+    FORCE_HTTPS: true
+
+applications:
+  - name: ui-material
+    <<: *defaults
+    env:
+      NODE_ENV: development
+    routes:
+      - route: copcr-uimt.apps1-fm-int.icloud.intel.com

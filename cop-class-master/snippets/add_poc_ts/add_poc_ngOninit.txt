@@ -1,0 +1,20 @@
+this.pocFormGroup = this._formBuilder.group({
+    name: this.appNameControl,
+    owner: this.ownerControl,
+    collaborators: this.collaboratorsControl,
+    pathway: this.pathwayControl,
+    description: this.descriptionControl,
+    presentationDate: this.dateControl
+});
+
+this.ownerControl.valueChanges.subscribe(value => {
+    this.getWorkers(value);
+});
+
+this.collaboratorsControl.valueChanges.subscribe(value => {
+    this.getWorkers(value);
+});
+
+setTimeout(() => {
+    this.step = 0;
+}, 400);

@@ -1,0 +1,187 @@
+h1.title {
+    color: #53565a;
+}
+
+.text-center small {
+    margin-bottom: 10px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+p {
+    margin: 5px;
+}
+
+.container.item-card {
+    position: relative;
+    height: 100%;
+}
+
+.bold {
+    font-weight: bolder;
+    margin-left: 15px;
+}
+
+.separation-bottom {
+    margin-bottom: 1em;
+}
+
+.info-line {
+    display: flex;
+    margin: 10px 0;
+}
+
+.info-line.collaborators {
+    align-items: flex-start;
+    flex-direction: column;
+
+    .label-info {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.info-line {
+    align-items: center;
+    flex-direction: row;
+
+    .label-info {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-text {
+        margin-left: 15px;
+
+        p {
+            margin: 0;
+            margin-bottom: -5px;
+        }
+
+    }
+
+    p.collab {
+        margin-bottom: 0px;
+    }
+
+    .info-text.icons {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.info-line.description {
+    margin-bottom: 0;
+}
+
+.info-line .icon {
+    display: flex;
+    color: #53565a;
+}
+
+.info-line .status-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.description-line {
+    display: flex;
+    flex-direction: column;
+}
+
+.description-text {
+    cursor: pointer;
+}
+
+.options button:first-child {
+    margin-right: 10px;
+}
+
+.row .options {
+    // position: absolute;
+    // bottom: 0;
+    margin-bottom: 1em;
+
+    button {
+        width: 100px;
+    }
+
+    button.approve-button {
+        background-color: #689f5f;
+        color: white;
+    }
+
+    button.reject-button {
+        background-color: #e15959;
+        color: white;
+    }
+}
+
+.collab-bucket {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    max-width: 250px;
+    overflow-x: auto;
+    padding: 5px;
+
+    img.worker-img {
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    mat-card {
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+
+        button {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+
+            mat-icon {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .collab-info {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.col.spinner-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+::ng-deep .mat-card {
+    padding: 5px !important;
+}
+
+mat-icon.approved {
+    color: green;
+    padding-left: 12px;
+}
+  
+mat-icon.rejected {
+    color: red;
+    padding-left: 12px;
+}
+
+mat-icon.pending {
+    color: #f7c15c;
+    padding-left: 12px;
+}
+
+mat-icon {
+    font-size: 24px;
+}
